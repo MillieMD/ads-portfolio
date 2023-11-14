@@ -60,4 +60,9 @@ public abstract class SearcherTest {
         testSearch(10000);
     }
 
+    @Test
+    public void test100000(){
+        testSearch(100000);
+    }
+
 }

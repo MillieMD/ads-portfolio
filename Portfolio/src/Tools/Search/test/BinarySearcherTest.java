@@ -1,8 +1,5 @@
 package Tools.Search.test;
 
-
-import java.util.Random;
-
 public class BinarySearcherTest extends SearcherTest {
     @Override
     Integer[] getArray(int size) { // Sorted Array for binary search

@@ -1,12 +1,11 @@
 package Practical_11;
 
 import java.util.Objects;
-import Tools.Search.Searcher;
 
 public class Session {
 
     private final int id;
-    private String location;
+    private final String location;
     private Talk[] talks; // Capacity 4, ascending order based on startTime
     private int numOfTalks;
 
@@ -47,7 +46,7 @@ public class Session {
         }
 
         // Find index t belongs at
-        int i = 0;
+        int i;
         for(i = 0;i < numOfTalks; i++){
             // Positive integer = more than, negative = less than
             // Breaks when i is the index of the first element that t is less than
@@ -98,7 +97,7 @@ public class Session {
      * @param index element removed
      */
     private void remove(int index){
-        if(index < 0){ // To prevent OutOfBoundsException
+        if(index < 0 || index > numOfTalks){ // To prevent OutOfBoundsException
             return;
         }
 
@@ -123,7 +122,15 @@ public class Session {
      * @return Index of talk t, returns -1 if element not found
      */
     private int indexOf(Talk t){
-        return Searcher.search(t, talks);
+
+        for(int i = 0; i < numOfTalks; i++){
+
+            if(talks[i] == t){
+                return i;
+            }
+        }
+
+        return -1;
     }
 
     /**
@@ -183,7 +190,7 @@ public class Session {
         StringBuilder s = new StringBuilder();
         s.append("Timetable for: ").append(location).append("\n");
 
-        s.append(String.format("%2s | %-48s | %-16s %n", "ID", "Talk", "Start Time"));
+        s.append(String.format("%2s|%-48s|%-16s%n", "ID", "Talk", "Start Time"));
 
         for (Talk t: talks){
 

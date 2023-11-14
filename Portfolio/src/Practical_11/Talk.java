@@ -1,6 +1,7 @@
 package Practical_11;
 
 import java.time.LocalDateTime;
+import java.util.regex.Pattern;
 
 public class Talk implements Comparable<Talk> {
 
@@ -23,8 +24,14 @@ public class Talk implements Comparable<Talk> {
         this.speaker = speaker;
         this.title = title;
 
-        // TODO: Check start time is yyyy-MM-ddThh:mm:ss
-        // regex?
+        // ISO 8601 regex expression
+        // Regex generated with: https://regex-generator.olafneumann.org/
+        Pattern p = Pattern.compile("[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(\\.[0-9]+)?([Zz]|([\\+-])([01]\\d|2[0-3]):?([0-5]\\d)?)?", Pattern.CASE_INSENSITIVE);
+
+        if(!p.matcher(startTime).matches()){
+            throw new RuntimeException(startTime + " is an invalid time. Please use format: yyyy-MM-ddThh:mm:ss");
+        }
+
         this.startTime = LocalDateTime.parse(startTime);
     }
 
@@ -89,7 +96,7 @@ public class Talk implements Comparable<Talk> {
      */
     @Override
     public String toString(){
-        return String.format("%-2s | %-48s | %-16s%n", id, title + " with " + speaker, getStartTimeString());
+        return String.format("%-2s|%-48s|%-16s%n", id, title + " with " + speaker, getStartTimeString());
     }
 
     public int getID(){
@@ -112,8 +119,6 @@ public class Talk implements Comparable<Talk> {
      * @return human-readable format of talk's start time
      */
     public String getStartTimeString(){
-        // TODO: Format as a more human-readable format
-
         String s = startTime.getHour() + ":" + startTime.getMinute() + " " + startTime.getDayOfMonth() + " " + startTime.getMonth() + " " + startTime.getYear();
 
         return String.format("%02d", startTime.getHour()) + ":" + String.format("%02d", startTime.getMinute()) + " "

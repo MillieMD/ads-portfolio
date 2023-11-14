@@ -1,6 +1,6 @@
 package Practical_13;
 
-public class Main {
+public class TokenizerCheck {
 
     public static void main(String[] args) {
 

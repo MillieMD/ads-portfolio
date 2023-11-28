@@ -20,6 +20,11 @@ public class Talk implements Comparable<Talk> {
      */
     public Talk(int id, String speaker, String title, String startTime){
 
+        /*
+        * COMPLEXITY ANALYSIS:
+        * All methods are O(1)
+        */
+
         this.id = id;
         this.speaker = speaker;
         this.title = title;

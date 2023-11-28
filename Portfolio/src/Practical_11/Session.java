@@ -11,7 +11,7 @@ public class Session {
 
     /**
      * Create new session to track talks
-     *
+     * O(1)
      * @param id session id
      * @param location location of session
      */
@@ -26,7 +26,7 @@ public class Session {
 
     /**
      * Add new talk to schedule, inserted in ascending time order
-     *
+     * O(n)
      * @param t talk to add
      */
     public void scheduleTalk(Talk t){
@@ -66,7 +66,7 @@ public class Session {
 
     /**
      * Remove talk from schedule
-     *
+     * O(n)
      * @param t talk to cancel
      */
     public void cancelTalk(Talk t){
@@ -75,7 +75,7 @@ public class Session {
 
     /**
      * Remove talk from schedule, based on ID
-     *
+     * O(n)
      * @param talkID talk to cancel
      */
     public void cancelTalk(int talkID){
@@ -84,7 +84,7 @@ public class Session {
 
     /**
      * Remove talk with matching title, based on title
-     *
+     * O(n)
      * @param title title of talk to cancel
      */
     public void cancelTalk(String title){
@@ -93,7 +93,7 @@ public class Session {
 
     /**
      * Remove element from index, remove gap created
-     *
+     * O(n)
      * @param index element removed
      */
     private void remove(int index){
@@ -119,9 +119,12 @@ public class Session {
      * Binary search for t within an array of talks
      *
      * @param t talk to locate
+     * O(n)
      * @return Index of talk t, returns -1 if element not found
      */
     private int indexOf(Talk t){
+
+        // TODO: binary search for t
 
         for(int i = 0; i < numOfTalks; i++){
 
@@ -135,6 +138,7 @@ public class Session {
 
     /**
      * @param talkID ID of talk to locate
+     * O(n)
      * @return Index of talk with talkID, returns -1 if element not found
      */
     private int indexOf(int talkID){
@@ -153,6 +157,7 @@ public class Session {
 
     /**
      * @param title title of talk to locate
+     * O(n)
      * @return Index of talk with matching title, returns -1 if element not found
      */
     private int indexOf(String title){
@@ -182,6 +187,8 @@ public class Session {
     }
 
     /**
+     * Human friendly representation of the session timetable
+     * O(n)
      * @return Scheduled talks formatted as a table
      */
     @Override
@@ -193,11 +200,9 @@ public class Session {
         s.append(String.format("%2s|%-48s|%-16s%n", "ID", "Talk", "Start Time"));
 
         for (Talk t: talks){
-
             if(t == null){
                 break;
             }
-
             s.append(t);
         }
 

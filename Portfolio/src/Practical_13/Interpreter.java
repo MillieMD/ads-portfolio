@@ -1,16 +1,16 @@
 package Practical_13;
 
-public class Tokenizer {
+public class Interpreter {
     private Double[] stack;
     private int stackPointer;
     private String delim = " "; // Space
 
-    Tokenizer(){}
+    Interpreter(){}
 
     /**
      * @param delim user specified deliminator for strings e.g. "/"
      */
-    Tokenizer(String delim){
+    Interpreter(String delim){
         this.delim = delim;
     }
 

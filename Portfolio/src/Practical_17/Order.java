@@ -2,15 +2,15 @@ package Practical_17;
 
 public class Order {
 
-    private final String id;
+    private String id;
     private String productName;
-    private float unitPrice;
+    private double unitPrice;
     private int quantity;
     private StatusType status;
 
     enum StatusType {Pending, Paid, Shipped, Delivered, Refunded}
 
-    Order(String id, String name, float price, int quantity){
+    Order(String id, String name, double price, int quantity){
 
         this.id = id;
         productName = name;
@@ -21,6 +21,7 @@ public class Order {
     }
 
     // Setters
+    public void setId(String id){this.id = id;}
     public void setProductName(String productName) {
         this.productName = productName;
     }
@@ -33,7 +34,7 @@ public class Order {
         this.status = status;
     }
 
-    public void setUnitPrice(float unitPrice) {
+    public void setUnitPrice(double unitPrice) {
         this.unitPrice = unitPrice;
     }
 
@@ -54,12 +55,12 @@ public class Order {
         return status;
     }
 
-    public float getUnitPrice() {
+    public double getUnitPrice() {
         return unitPrice;
     }
 
     @Override
     public String toString() {
-        return id + ": " + quantity + " x " + productName + "("+ unitPrice +")";
+        return id + ": " + quantity + " x " + productName + "("+ unitPrice +") \nStatus: " + status;
     }
 }

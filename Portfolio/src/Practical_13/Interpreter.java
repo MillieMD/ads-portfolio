@@ -65,7 +65,7 @@ public class Interpreter {
                         break;
 
                     default:
-                        throw new RuntimeException("Invalid Operator \n Expected: +, -, *, /");
+                        throw new RuntimeException("Invalid Operator \n Expected: '+', '-', '*', '/'");
                 }
             }
         }

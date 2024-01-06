@@ -2,6 +2,7 @@ package Practical_12;
 
 import java.util.Arrays;
 import java.util.LinkedList;
+import java.util.Objects;
 
 public class Paper implements Comparable<Paper>{
 
@@ -9,11 +10,6 @@ public class Paper implements Comparable<Paper>{
     private String title;
     private String[] authors;
     private LinkedList<Review> reviews;
-
-    /*
-    [x] add review, [x] remove review, [x] update review (reorder, print after change),
-    [x] no duplicate reviewers, [x] sort by score (desc)
-     */
 
     public Paper(int id, String title, String... authors){
 
@@ -50,6 +46,7 @@ public class Paper implements Comparable<Paper>{
 
         // Add review at correct index
         reviews.add(i, r);
+        System.out.println(this);
     }
 
     /**
@@ -57,8 +54,18 @@ public class Paper implements Comparable<Paper>{
      *
      * @param r review to remove
      */
-    public void removeReview(Review r){
+    private void removeReview(Review r){
         reviews.remove(r);
+
+        System.out.println(this);
+    }
+
+    /**
+     * Retract a review, given its id
+     * @param id id to remove
+     */
+    public void retractReview(int id){
+        removeReview(reviews.get(indexOf(id)));
     }
 
     /**
@@ -110,7 +117,7 @@ public class Paper implements Comparable<Paper>{
      * Automatically keeping the list sorted
      *
      * @param oldReview Review to remove
-     * @param updatedReview New review with updated informated
+     * @param updatedReview New review with updated information
      */
     private void updateReview(Review oldReview, Review updatedReview){
 
@@ -120,18 +127,30 @@ public class Paper implements Comparable<Paper>{
         addReview(updatedReview);
     }
 
-    // TODO: indexOf methods
     public int indexOf(int id){
-        return 0;
+        int i = 0;
+        for(i = 0; i < reviews.size(); i++){
+
+            if(reviews.get(i).getId() == id){ // Sort by descending score
+                return i;
+            }
+        }
+
+        return -1;
     }
 
     public int indexOf(String reviewer){
-        return 0;
+        int i = 0;
+        for(i = 0; i < reviews.size(); i++){
+
+            if(Objects.equals(reviews.get(i).getReviewer(), reviewer)){ // Sort by descending score
+                return i;
+            }
+        }
+
+        return -1;
     }
 
-    public int indexOf(Review r){
-        return 0;
-    }
 
     /**
      * @return average score, weighted with confidence
@@ -169,7 +188,7 @@ public class Paper implements Comparable<Paper>{
 
         StringBuilder s = new StringBuilder();
 
-        s.append(title).append(" Average Score: ").append(getAverageScore());
+        s.append(title).append(" Average Score: ").append(getAverageScore()).append("\n");
 
         for(Review review : reviews) {
             s.append(review);

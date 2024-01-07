@@ -70,6 +70,7 @@ public class Interpreter {
             }
         }
 
+        System.out.println("Result: " + stack[0]);
         return stack[0];
     }
 

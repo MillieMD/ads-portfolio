@@ -1,4 +1,7 @@
-# ads-portfolio
+# ads-portfolio (archive)
+
+**Module ended - archived**
+
 Algorithms and Datatstructures portfolio
 
 practical 11: arraylist  
